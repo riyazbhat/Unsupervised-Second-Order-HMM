@@ -1,2 +1,2 @@
-# Unsupervised-Second-Order-HMM
-Second Order Implementation of Hidden Markov Model for Tagging.
+# Unsupervised Second Order HMM
+Implementation of Second Order Hidden Markov Model for Sequence Tagging.
