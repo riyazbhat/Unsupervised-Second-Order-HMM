@@ -83,8 +83,7 @@ class Tagger (object):
 		best_tag_sequence.reverse()
 		return best_tag_sequence
 
-if __name__ == "__main__":
-
+def main():
 	parser = argparse.ArgumentParser(description="Second-Order HMM Tagger.")
 	parser.add_argument('--input-file'              , dest='input'     , required=True, help='Unlabelled sentences')
 	parser.add_argument('--states-dictionary'       , dest='states'    , required=True, help='Dictionary of states')
@@ -132,3 +131,6 @@ if __name__ == "__main__":
 		print "\n".join([word.encode("utf-8")+"\t"+goldTag.encode("utf-8")+"\t"+autoTag.encode("utf-8")\
 				for word, goldTag, autoTag in zip(words, goldTags, tagSequence)])
 		print
+
+if __name__ == "__main__":
+	main()
