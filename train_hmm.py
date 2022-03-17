@@ -9,14 +9,13 @@ import numpy as np
 import secondOrder_hmm_mp as UNHMM
 from multiprocessing import cpu_count
 
-def _train (data, symbols, priors, outputs, transitions_1HMM, transitions_2HMM):
+
+def train (data, symbols, priors, outputs, transitions_1HMM, transitions_2HMM):
 	model = UNHMM.unsupervisedHMM(symbols, priors, outputs, transitions_1HMM, transitions_2HMM)
 	model.train(data)
 	return model
-    
-if __name__ == "__main__":
 
-
+def main():
 	parser = argparse.ArgumentParser(description="Un-supervised HMM tagger")
 	parser.add_argument('--input-file'              , dest='input'      , required=True, help='Un-labelled corpora')
 	parser.add_argument('--prior-probabilities'     , dest='prior'      , required=True, help='List of prior probabilities')
@@ -49,8 +48,13 @@ if __name__ == "__main__":
 	if skip:
 		trainingSentences = list(trainingSentences)[:-skip]
 	print len(trainingSentences)
-	model = _train(trainingSentences, observation_symbols, prior_probabilities, emission_probabilities,
+	model = train(trainingSentences, observation_symbols, prior_probabilities, emission_probabilities,
 						transition_probabilities_1HMM, transition_probabilities_2HMM)
 	np.save("emission_parameters.npy" , model._outputs)
 	np.save("bigram_parameters.npy"   , model._transitions_1HMM)
 	np.save("trigram_parameters.npy"  , model._transitions_2HMM)
+    
+if __name__ == "__main__":
+	main()
+
+
